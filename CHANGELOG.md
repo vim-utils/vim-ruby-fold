@@ -1,0 +1,4 @@
+# Changelog
+
+### master
+- plugin working
