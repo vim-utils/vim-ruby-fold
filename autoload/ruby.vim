@@ -16,14 +16,28 @@ function! s:block_end_line(line)
   return end_pos
 endfunction
 
-function! s:get_highlight_groups(line)
-  let stack = synstack(a:line, (match(getline(a:line), '^\s*\zs'))+1)
+function! s:get_highlight_groups(current_line, line)
+  let stack = synstack(a:line, (match(a:current_line, '^\s*\zs'))+1)
   return map(stack, 'synIDattr(v:val,"name")')
+endfunction
+
+function! s:alias_line(current_line)
+   return a:current_line =~# '^\s*alias'
+endfunction
+
+function! s:one_line_method(current_line)
+  return a:current_line =~# '^\s*def\s.\{-}\<end\s*$'
 endfunction
 
 " fold functions {{{1
 function! ruby#fold(line)
-  let highlight_groups = s:get_highlight_groups(a:line)
+  let current_line = getline(a:line)
+  if s:alias_line(current_line) ||
+   \ s:one_line_method(current_line)
+    return 0
+  endif
+
+  let highlight_groups = s:get_highlight_groups(current_line, a:line)
   if index(highlight_groups, "rubyMethodBlock", 0, 1) >= 0 ||
    \ index(highlight_groups, "rubyDefine", 0, 1) >= 0 ||
    \ index(highlight_groups, "rubyDocumentation", 0, 1) >= 0
