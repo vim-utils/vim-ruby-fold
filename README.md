@@ -21,6 +21,18 @@ Benefits:
 
 Just use your favorite plugin manager.
 
+### Options
+
+Folds computation is slow for big files. This might result in noticeable lag
+when opening ruby files.
+
+The solution to this is to limit fold creation only for small ruby files.
+The following option
+
+    let g:ruby_fold_lines_limit = 200
+
+will only fold ruby files if they have less than 200LOC.
+
 ### License
 
 [MIT](LICENSE.md)
