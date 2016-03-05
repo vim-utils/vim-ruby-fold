@@ -33,6 +33,23 @@ The following option
 
 will only fold ruby files if they have less than 200LOC.
 
+### Alternatives
+
+There is a [pull request](https://github.com/vim-ruby/vim-ruby/pull/272) opened
+for official vim-ruby plugin that adds more granular folding support. This PR
+could make `vim-ruby-fold` plugin obsolete.
+
+I tested the above PR for a couple weeks: it's roughly 30% faster at opening big
+ruby files (it's still takes quite some time to open ruby files with more than
+1000 LOC).
+
+The \*big* downside is it makes insert mode horribly slow and laggy. I think
+this is due to folds computation after every character insert.
+
+The `vim-ruby-fold` performs perfectly in this scenario because it computes
+folds only when entering the buffer. For this reason I'm sticking with it for
+the foreseeable future.
+
 ### License
 
 [MIT](LICENSE.md)
