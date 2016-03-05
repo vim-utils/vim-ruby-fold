@@ -19,11 +19,7 @@ Benefits:
 
 ### Installation
 
-* Vundle<br/>
-`Plugin 'bruno-/vim-ruby-fold'`
-
-* Pathogen<br/>
-`git clone git://github.com/bruno-/vim-ruby-fold.git ~/.vim/bundle/vim-ruby-fold`
+Just use your favorite plugin manager.
 
 ### License
 
